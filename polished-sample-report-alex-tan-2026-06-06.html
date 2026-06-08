@@ -1,0 +1,1000 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Online Footprint Scan Report - Internal Sample</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #18212f;
+      --muted: #596273;
+      --line: #d8dee8;
+      --paper: #ffffff;
+      --soft: #f5f7fa;
+      --brand: #0f766e;
+      --brand-soft: #e2f3ef;
+      --risk-medium: #a16207;
+      --risk-low: #386641;
+      --risk-soft: #fff7ed;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #eef2f6;
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    main {
+      width: min(980px, calc(100% - 32px));
+      margin: 28px auto;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 60px rgba(24, 33, 47, 0.12);
+    }
+
+    section {
+      padding: 30px 42px;
+      border-top: 1px solid var(--line);
+    }
+
+    .cover {
+      padding: 44px 42px 34px;
+      border-top: 0;
+      background:
+        linear-gradient(135deg, rgba(15, 118, 110, 0.12), rgba(245, 247, 250, 0) 48%),
+        var(--paper);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      max-width: 780px;
+      font-size: 40px;
+      font-weight: 750;
+    }
+
+    h2 {
+      margin-bottom: 16px;
+      font-size: 23px;
+    }
+
+    h3 {
+      margin: 22px 0 8px;
+      font-size: 17px;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    a {
+      color: #0b5f7a;
+      overflow-wrap: anywhere;
+    }
+
+    .deck {
+      max-width: 740px;
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .meta-grid,
+    .score-grid,
+    .finding-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .meta-grid {
+      grid-template-columns: repeat(4, 1fr);
+      margin-top: 28px;
+    }
+
+    .score-grid {
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 18px;
+    }
+
+    .finding-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .box,
+    .score,
+    .finding-card {
+      border: 1px solid var(--line);
+      background: var(--soft);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .box-label,
+    .score-label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .box-value,
+    .score-value {
+      font-weight: 700;
+    }
+
+    .score-value {
+      font-size: 22px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .pill.medium {
+      background: var(--risk-soft);
+      color: var(--risk-medium);
+      border: 1px solid #fed7aa;
+    }
+
+    .pill.low {
+      background: #ecfdf3;
+      color: var(--risk-low);
+      border: 1px solid #bbf7d0;
+    }
+
+    .pill.info {
+      background: var(--brand-soft);
+      color: var(--brand);
+      border: 1px solid #b9e4db;
+    }
+
+    .callout {
+      margin-top: 16px;
+      padding: 16px 18px;
+      border-left: 4px solid var(--brand);
+      background: var(--brand-soft);
+      border-radius: 0 8px 8px 0;
+    }
+
+    ul,
+    ol {
+      margin: 0 0 12px 20px;
+      padding: 0;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      padding: 11px 10px;
+      border: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #edf2f7;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .footer-note {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: var(--brand);
+      color: #fff;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .button.secondary {
+      background: #2f3a4a;
+    }
+
+    @media (max-width: 760px) {
+      main {
+        width: 100%;
+        margin: 0;
+        border-left: 0;
+        border-right: 0;
+      }
+
+      section,
+      .cover {
+        padding: 24px 20px;
+      }
+
+      h1 {
+        font-size: 31px;
+      }
+
+      .meta-grid,
+      .score-grid,
+      .finding-grid,
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      main {
+        width: 100%;
+        margin: 0;
+        border: 0;
+        box-shadow: none;
+      }
+
+      section {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="cover">
+      <p class="eyebrow">Public-source online footprint scan</p>
+      <h1>Online Footprint Scan Report</h1>
+      <p class="deck">
+        A practical review of what may be visible when a professional name is searched online,
+        with findings separated into confirmed matches, likely false positives, and items that
+        may require monitoring or cleanup.
+      </p>
+
+      <div class="meta-grid" aria-label="Report details">
+        <div class="box">
+          <span class="box-label">Client</span>
+          <span class="box-value">Alex Tan</span>
+        </div>
+        <div class="box">
+          <span class="box-label">Scan Date</span>
+          <span class="box-value">6 June 2026</span>
+        </div>
+        <div class="box">
+          <span class="box-label">Prepared By</span>
+          <span class="box-value">CleanMyFootprint sample</span>
+        </div>
+        <div class="box">
+          <span class="box-label">Report Type</span>
+          <span class="box-value">Internal sample</span>
+        </div>
+        <div class="box">
+          <span class="box-label">Case ID</span>
+          <span class="box-value">CMF-DEMO-20260606</span>
+        </div>
+        <div class="box">
+          <span class="box-label">Response Route</span>
+          <span class="box-value">Response form / email / portal</span>
+        </div>
+        <div class="box">
+          <span class="box-label">Last Updated</span>
+          <span class="box-value">6 June 2026</span>
+        </div>
+        <div class="box">
+          <span class="box-label">Next Update Due</span>
+          <span class="box-value">After client response</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Quick Read</h2>
+      <p>
+        If you only read one page, read this section. This scan did not find an urgent crisis. It
+        found a moderate exposure pattern: broad-name confusion, a narrower legal-name business
+        record, and third-party mirrors that may keep public data visible.
+      </p>
+      <div class="finding-grid">
+        <div class="finding-card">
+          <span class="pill low">Good news</span>
+          <h3>No high-priority item found</h3>
+          <p>No immediate emergency was identified in this first-pass public-source scan.</p>
+        </div>
+        <div class="finding-card">
+          <span class="pill medium">Main concern</span>
+          <h3>Public business-record mirrors</h3>
+          <p>The business-registration-style result should be confirmed and monitored for duplicate mirrors.</p>
+        </div>
+        <div class="finding-card">
+          <span class="pill info">Customer choice</span>
+          <h3>Low visibility or controlled visibility</h3>
+          <p>The client can stay low-profile or intentionally strengthen one trusted professional result.</p>
+        </div>
+        <div class="finding-card">
+          <span class="pill medium">Next step</span>
+          <h3>Submit one decision form</h3>
+          <p>The client only needs to confirm accuracy, choose a next step, and set approval boundaries.</p>
+        </div>
+      </div>
+      <div class="callout">
+        <strong>Recommended path:</strong> choose a cleanup sprint only if the business-record details
+        are outdated, excessive, or copied by mirror sites in a way the client wants to reduce.
+        Otherwise, monitor and keep the report as a baseline.
+      </div>
+    </section>
+
+    <section>
+      <h2>Executive Summary</h2>
+      <p>
+        The scan found no immediate high-priority exposure in this first pass. The main issue is
+        not a single damaging result, but the way different search terms create very different
+        visibility patterns.
+      </p>
+      <p>
+        The broad name <strong>Alex Tan</strong> produces many unrelated people and profiles,
+        which creates identity noise. The full legal-name search is much narrower and surfaced
+        Taiwan company-registration-style records and third-party mirrors. Those records appear
+        business-related rather than casual personal exposure, but they should be confirmed and
+        monitored because mirror sites can duplicate or preserve public registry data.
+      </p>
+
+      <div class="score-grid">
+        <div class="score">
+          <span class="score-label">Overall Exposure</span>
+          <span class="score-value">Moderate</span>
+        </div>
+        <div class="score">
+          <span class="score-label">Confidence</span>
+          <span class="score-value">Medium</span>
+        </div>
+        <div class="score">
+          <span class="score-label">Urgent Items</span>
+          <span class="score-value">0</span>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Main takeaway:</strong> the value of the service is clarity. A client is not only
+        paying to find links. They are paying to know which results are actually them, which results
+        are not them, and which ones deserve action.
+      </div>
+    </section>
+
+    <section>
+      <h2>Action Required From You</h2>
+      <p>
+        To continue, review the three decisions below and submit your response using the next-step
+        response form. If you take no action, no cleanup request will be drafted or sent.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Decision Needed</th>
+            <th>Why It Matters</th>
+            <th>Recommended Choice</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Confirm whether the business-registration result is accurate and expected.</td>
+            <td>We need to separate acceptable public business exposure from incorrect or outdated exposure.</td>
+            <td>Answer in the response form.</td>
+          </tr>
+          <tr>
+            <td>Choose what you want us to do next.</td>
+            <td>The next step changes the scope: scan only, cleanup sprint, monitoring, or controlled visibility.</td>
+            <td>Option B if you want action on the medium-priority findings.</td>
+          </tr>
+          <tr>
+            <td>Confirm the approval boundary.</td>
+            <td>We can draft requests, but we should not contact any third party until you approve.</td>
+            <td>Allow drafting, require approval before sending.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="button-row">
+        <a class="button" href="client-next-step-response-form.html">Submit Next-Step Decision</a>
+        <a class="button secondary" href="#findings-table">Review Findings Table</a>
+      </div>
+    </section>
+
+    <section>
+      <h2>Search Scope</h2>
+      <div class="two-col">
+        <div>
+          <h3>Identifiers Checked</h3>
+          <ul>
+            <li>Alex Jun Wei Tan</li>
+            <li>Alex Jun Wei</li>
+            <li>Alex Tan</li>
+            <li>Alex Tan Singapore</li>
+            <li>Alex Tan Meridian Advisory</li>
+            <li>Alex Tan Meridian Advisory Singapore</li>
+            <li>Alex Tan General Manager</li>
+            <li>alex.tan.consulting</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Sources Reviewed</h3>
+          <ul>
+            <li>General web search results</li>
+            <li>Public profile snippets surfaced by search</li>
+            <li>Public PDFs</li>
+            <li>Business-registration-style pages</li>
+            <li>Taiwan company-registration source surfaced by search</li>
+            <li>Third-party company information mirrors</li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-note">
+        This sample scan did not use hacking, private account access, paid databases, leaked data,
+        credentialed systems, or private records.
+      </p>
+    </section>
+
+    <section>
+      <h2>Findings Snapshot</h2>
+      <div class="finding-grid">
+        <div class="finding-card">
+          <span class="pill medium">Medium</span>
+          <h3>Legal-name business record exposure</h3>
+          <p>
+            Full legal-name searches surfaced Taiwan company-registration-style records tied to a
+            business representative role.
+          </p>
+        </div>
+        <div class="finding-card">
+          <span class="pill medium">Medium</span>
+          <h3>Third-party data mirrors</h3>
+          <p>
+            Public registry-style information appears on non-official company information sites,
+            which may be harder to correct or remove.
+          </p>
+        </div>
+        <div class="finding-card">
+          <span class="pill low">Low to medium</span>
+          <h3>Broad-name identity noise</h3>
+          <p>
+            The name Alex Tan returns many unrelated people, proving that false-positive review
+            is essential before drawing conclusions.
+          </p>
+        </div>
+        <div class="finding-card">
+          <span class="pill info">Opportunity</span>
+          <h3>Controlled visibility decision</h3>
+          <p>
+            If low public visibility is not intentional, a controlled professional profile could
+            help shape what people find first.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 id="findings-table">Findings Table</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>Source</th>
+            <th>Finding</th>
+            <th>Risk</th>
+            <th>Recommended Action</th>
+            <th>Owner</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><span class="pill medium">Client input needed</span></td>
+            <td>Taiwan public company-registration-style sources</td>
+            <td>Full legal name appears in public business-registration-style results.</td>
+            <td><span class="pill medium">Medium</span></td>
+            <td>Confirm accuracy, classify as known business exposure, and monitor for duplicated listings.</td>
+            <td>Client / company</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><span class="pill medium">Ready to map</span></td>
+            <td>Third-party company mirrors</td>
+            <td>Public registry data appears on non-official company information sites.</td>
+            <td><span class="pill medium">Medium</span></td>
+            <td>Map each mirror and check correction or removal routes where information is wrong or excessive.</td>
+            <td>Client with assistance</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><span class="pill low">False-positive review</span></td>
+            <td>Broad-name search results</td>
+            <td>Many unrelated Alex Tan results appear in Singapore and overseas.</td>
+            <td><span class="pill low">Low-medium</span></td>
+            <td>Classify false positives and decide whether a controlled profile is useful.</td>
+            <td>Client</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><span class="pill info">Client preference</span></td>
+            <td>Meridian Advisory-specific queries</td>
+            <td>No obvious high-ranking public result tied the client to Meridian Advisory in this first pass.</td>
+            <td><span class="pill low">Low</span></td>
+            <td>Decide whether low visibility is desirable or whether controlled visibility should be improved.</td>
+            <td>Client</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><span class="pill low">Monitor</span></td>
+            <td>Username search</td>
+            <td>No obvious public search result surfaced for alex.tan.consulting in this first pass.</td>
+            <td><span class="pill low">Low</span></td>
+            <td>No action unless the username is used publicly elsewhere.</td>
+            <td>Client</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Detailed Findings</h2>
+
+      <h3>Finding 1: Public Business-Registration Exposure</h3>
+      <p>
+        The full legal-name search surfaced public Taiwan company-registration-style results,
+        including official and third-party sources. This appears to be lawful business-record
+        exposure rather than casual personal exposure.
+      </p>
+      <p>
+        <strong>Why it matters:</strong> official registry information may be difficult or impossible
+        to remove if accurate, but it can still affect what a client, recruiter, vendor, or stranger
+        sees first. The bigger practical issue is duplication by third-party mirrors.
+      </p>
+      <p><strong>Recommended action:</strong></p>
+      <ol>
+        <li>Confirm whether the company name, role, and associated details are accurate and expected.</li>
+        <li>If accurate, classify the result as known public business exposure.</li>
+        <li>If inaccurate or outdated, identify the official correction route.</li>
+        <li>Track third-party mirrors separately because each site may have a different correction process.</li>
+      </ol>
+      <p><strong>Example source links reviewed:</strong></p>
+      <ul>
+        <li><a href="https://www.findcompany.com.tw/%E6%96%B0%E5%8A%A0%E5%9D%A1%E5%95%86%E5%8B%9E%E5%A3%AB%E9%A0%98%E5%B7%A5%E6%A5%AD%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8">FindCompany Taiwan company page</a></li>
+        <li><a href="https://www.shuididp.cn/yp-cc34f8fc32d2abdd43bbfbf716d34302.html">Shuidi third-party mirror page</a></li>
+        <li><a href="https://serv.gcis.nat.gov.tw/pub/cmpy/reportAction.do?fileName=376430000Asetup11406.pdf&amp;method=report&amp;reportClass=cmpyCityItem&amp;subPath=11406">Taiwan government company setup PDF</a></li>
+      </ul>
+
+      <h3>Finding 2: Third-Party Data Mirrors</h3>
+      <p>
+        Public registry data does not stay only in the original registry. Third-party company
+        information sites may copy, reformat, translate, or preserve it.
+      </p>
+      <p>
+        <strong>Why it matters:</strong> even if the original record is accurate, mirrors can become
+        stale, rank in search results, and make cleanup harder because each mirror has its own policy.
+      </p>
+      <p><strong>Recommended action:</strong> maintain a mirror tracker with URL, data shown, search visibility, correction route, request status, and follow-up date.</p>
+
+      <h3>Finding 3: Broad-Name False Positives</h3>
+      <p>
+        The name Alex Tan is common enough to produce many unrelated people and profiles. This is
+        not automatically a risk, but it can confuse searches and make automated reports misleading.
+      </p>
+      <p>
+        <strong>Recommended action:</strong> keep a clear false-positive section in the report so the
+        client knows what was excluded and why. If the client wants clearer professional visibility,
+        consider strengthening a controlled profile that ranks for the preferred identity.
+      </p>
+
+      <h3>Finding 4: Low Meridian Advisory Visibility</h3>
+      <p>
+        Searches connecting Alex Tan with Meridian Advisory did not surface an obvious high-ranking
+        public professional profile in this sample pass.
+      </p>
+      <p>
+        <strong>Interpretation:</strong> this may be positive from a privacy standpoint. If professional
+        discoverability matters, it may also mean that random third-party records could shape the
+        search impression more than a controlled profile.
+      </p>
+    </section>
+
+    <section>
+      <h2>Evidence Log</h2>
+      <p>
+        A full client report should keep evidence separate from interpretation. For this sample,
+        evidence is limited to public source links. A live cleanup sprint should add screenshots,
+        capture dates, and before/after status where possible.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Evidence Item</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Use In Cleanup</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Official or registry-style business record</td>
+            <td>Public source link</td>
+            <td><span class="pill medium">Needs confirmation</span></td>
+            <td>Confirm whether data is accurate before any correction route is considered.</td>
+          </tr>
+          <tr>
+            <td>Third-party mirror page</td>
+            <td>Public source link</td>
+            <td><span class="pill medium">Map route</span></td>
+            <td>Check site policy, correction path, and whether information is stale or excessive.</td>
+          </tr>
+          <tr>
+            <td>Broad-name false positives</td>
+            <td>Search result review</td>
+            <td><span class="pill low">Excluded</span></td>
+            <td>Show the client what was intentionally excluded from risk scoring.</td>
+          </tr>
+          <tr>
+            <td>Before/after screenshots</td>
+            <td>Screenshot evidence</td>
+            <td><span class="pill info">Add in cleanup sprint</span></td>
+            <td>Used to prove whether a result was removed, corrected, unchanged, or still pending.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>False Positive Review</h2>
+      <p>
+        Several results for the name Alex Tan were treated as likely false positives because they
+        appeared to refer to different people, roles, locations, or organizations.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Likely False Positive</th>
+            <th>Reason Excluded</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Academic and medical profiles with same name</td>
+            <td>Different professional context and geography.</td>
+          </tr>
+          <tr>
+            <td>Technology executive profiles with same name</td>
+            <td>Different company and public biography.</td>
+          </tr>
+          <tr>
+            <td>Singapore LinkedIn snippets with same name</td>
+            <td>Ambiguous or unrelated unless confirmed by the client.</td>
+          </tr>
+          <tr>
+            <td>Author and media profile results</td>
+            <td>No confirming link to the client's known identifiers in this pass.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout">
+        <strong>Product lesson:</strong> false-positive control is a core selling point. A useful
+        report should reduce confusion, not create a longer list of scary but irrelevant links.
+      </div>
+    </section>
+
+    <section>
+      <h2>Cleanup Priority List</h2>
+      <div class="two-col">
+        <div>
+          <h3>High Priority</h3>
+          <p>None identified in this first pass.</p>
+
+          <h3>Medium Priority</h3>
+          <ul>
+            <li>Confirm whether Taiwan company-registration exposure is accurate and expected.</li>
+            <li>Track third-party mirror pages and identify correction or removal routes.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Low Priority</h3>
+          <ul>
+            <li>Decide whether a controlled professional profile should be strengthened.</li>
+            <li>Monitor whether alex.tan.consulting appears in public search results over time.</li>
+            <li>Repeat the scan in 7 to 14 days if active cleanup begins.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Action Plan</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Purpose</th>
+            <th>Owner</th>
+            <th>Suggested Timing</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Confirm business-record accuracy</td>
+            <td>Separate expected public exposure from incorrect exposure.</td>
+            <td>Client / company</td>
+            <td>Now</td>
+          </tr>
+          <tr>
+            <td>Create mirror tracker</td>
+            <td>Monitor copied records and correction routes.</td>
+            <td>CleanMyFootprint</td>
+            <td>Within 48 hours</td>
+          </tr>
+          <tr>
+            <td>Draft correction requests if needed</td>
+            <td>Prepare clear requests for outdated or inaccurate third-party pages.</td>
+            <td>CleanMyFootprint with client approval</td>
+            <td>After client confirmation</td>
+          </tr>
+          <tr>
+            <td>Controlled visibility review</td>
+            <td>Decide whether a chosen professional result should rank above random records.</td>
+            <td>Client</td>
+            <td>Optional</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Progress Tracker</h2>
+      <p>
+        This tracker shows where the case stands today. If the client chooses a cleanup sprint, the
+        tracker should be updated after each material change.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Stage</th>
+            <th>Status</th>
+            <th>What It Means</th>
+            <th>Next Trigger</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Initial scan</td>
+            <td><span class="pill low">Complete</span></td>
+            <td>Public-source first-pass scan completed and summarized.</td>
+            <td>None.</td>
+          </tr>
+          <tr>
+            <td>Client review</td>
+            <td><span class="pill medium">Action required</span></td>
+            <td>Client needs to confirm accuracy and choose next step.</td>
+            <td>Response form submitted.</td>
+          </tr>
+          <tr>
+            <td>Cleanup planning</td>
+            <td><span class="pill info">Not started</span></td>
+            <td>Mirror tracker and correction routes will be prepared only if selected.</td>
+            <td>Client selects cleanup sprint.</td>
+          </tr>
+          <tr>
+            <td>External requests</td>
+            <td><span class="pill info">Blocked by design</span></td>
+            <td>No third party will be contacted until the client approves drafted requests.</td>
+            <td>Client approval.</td>
+          </tr>
+          <tr>
+            <td>Follow-up report</td>
+            <td><span class="pill info">Pending</span></td>
+            <td>A short update is sent after key status changes or after the agreed follow-up date.</td>
+            <td>Cleanup action or monitoring date.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>How To Proceed</h2>
+      <p>
+        This report is view-only. To move from report to action, the client should submit the
+        next-step response form, reply to the report email, or use the client's private case portal.
+        The client should not edit this report file directly.
+      </p>
+      <p>
+        No passwords, private account access, NRIC/passport details, banking details, or sensitive
+        documents are needed for this step.
+      </p>
+
+      <div class="button-row">
+        <a class="button" href="client-next-step-response-form.html">Open Next-Step Response Form</a>
+        <a class="button secondary" href="#client-decision-questions">View Decision Questions</a>
+      </div>
+
+      <div class="finding-grid">
+        <div class="finding-card">
+          <span class="pill info">Option A</span>
+          <h3>Scan only</h3>
+          <p>
+            Keep this report for awareness. No cleanup action is taken now. Recommended if all
+            findings are accurate, expected, and low concern.
+          </p>
+        </div>
+        <div class="finding-card">
+          <span class="pill medium">Option B</span>
+          <h3>Cleanup sprint</h3>
+          <p>
+            Start a focused cleanup sprint for the selected findings. We map correction routes,
+            prepare requests, and track follow-ups with client approval.
+          </p>
+        </div>
+        <div class="finding-card">
+          <span class="pill info">Option C</span>
+          <h3>Monitor only</h3>
+          <p>
+            Leave current results as-is but recheck search visibility later, especially for copied
+            public records and third-party mirrors.
+          </p>
+        </div>
+        <div class="finding-card">
+          <span class="pill low">Option D</span>
+          <h3>Controlled visibility</h3>
+          <p>
+            Improve what people see first by strengthening a chosen professional profile or page,
+            instead of trying to remove accurate public records.
+          </p>
+        </div>
+      </div>
+
+      <h3 id="client-decision-questions">Client Decision Questions</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Question</th>
+            <th>Client Response</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1. Which option do you want: A scan only, B cleanup sprint, C monitor only, or D controlled visibility?</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>2. Is the Taiwan business-registration information accurate and expected?</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>3. Are any listed details outdated, excessive, or incorrect?</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>4. Which findings should be worked on first?</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>5. Do you prefer lower public visibility, or a stronger controlled professional profile?</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>6. Do we have approval to draft correction or removal requests for selected third-party pages?</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <strong>Simple reply format:</strong><br>
+        "Proceed with Option B. The registry details are accurate/inaccurate. Please prioritize
+        findings 1 and 2. You may draft requests for my approval before anything is sent."
+      </div>
+
+      <h3>What Happens After The Client Replies</h3>
+      <ol>
+        <li>We confirm the selected scope and any missing details.</li>
+        <li>We prepare a cleanup tracker with source URL, issue, action route, owner, and follow-up date.</li>
+        <li>We draft any external correction or removal requests for client approval.</li>
+        <li>No external request is sent until the client approves it.</li>
+        <li>We provide a short completion summary with what changed, what is pending, and what cannot realistically be removed.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>What CleanMyFootprint Can Assist With</h2>
+      <ul>
+        <li>Public-source search mapping and evidence capture.</li>
+        <li>True-match, false-positive, and ambiguous-match classification.</li>
+        <li>Mirror-page tracking for copied public records.</li>
+        <li>Correction or removal route research.</li>
+        <li>Drafting external requests for client approval.</li>
+        <li>Follow-up monitoring after cleanup attempts.</li>
+        <li>Controlled professional visibility recommendations.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Limitations</h2>
+      <ul>
+        <li>This was a first-pass sample scan, not a complete investigation.</li>
+        <li>Image search was not completed in this pass.</li>
+        <li>Profile review was limited to public snippets and search-visible pages.</li>
+        <li>Country-specific business-record searches can be expanded in a full paid scan.</li>
+        <li>Some official public records may not be removable if they are accurate and legally required.</li>
+        <li>Cleanup results depend on third-party site policies and client approvals.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Client-Facing Closing Note</h2>
+      <p>
+        Your online footprint is not one profile. It is a collection of search results, old records,
+        duplicated pages, public documents, and unrelated people with similar names. This report
+        helps separate noise from meaningful exposure so you can decide what to leave alone, what to
+        correct, what to monitor, and what to reduce.
+      </p>
+      <p class="footer-note">
+        Disclaimer: This report provides practical online exposure support. It is not legal,
+        cybersecurity, or reputation-management advice. No removal outcome is guaranteed.
+      </p>
+    </section>
+  </main>
+</body>
+</html>

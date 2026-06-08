@@ -1,0 +1,809 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CleanMyFootprint - Public Online Footprint Scan</title>
+  <meta name="description" content="A public-source online footprint scan for professionals, founders, and business owners. See what is visible before someone else searches.">
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #596274;
+      --line: #d9e1ea;
+      --paper: #ffffff;
+      --wash: #f4f7f8;
+      --teal: #0f766e;
+      --teal-dark: #0b4f4b;
+      --amber: #c07a22;
+      --blue: #315d8a;
+      --soft-green: #e7f4f1;
+      --soft-amber: #fff4df;
+      --shadow: 0 22px 70px rgba(21, 31, 48, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .topbar {
+      position: fixed;
+      z-index: 20;
+      top: 0;
+      left: 0;
+      right: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(14, 24, 38, 0.78);
+      color: #fff;
+      backdrop-filter: blur(16px);
+    }
+
+    .nav {
+      width: min(1160px, calc(100% - 40px));
+      min-height: 64px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+    }
+
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      align-items: end;
+      position: relative;
+      isolation: isolate;
+      color: #fff;
+      background-image:
+        linear-gradient(90deg, rgba(8, 15, 26, 0.88), rgba(8, 15, 26, 0.62) 42%, rgba(8, 15, 26, 0.16) 72%),
+        linear-gradient(180deg, rgba(8, 15, 26, 0.15), rgba(8, 15, 26, 0.72)),
+        url("assets/landing-hero.png");
+      background-size: cover;
+      background-position: center;
+      padding: 112px 0 58px;
+    }
+
+    .hero-inner {
+      width: min(1160px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .hero-copy {
+      max-width: 720px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 18px;
+      color: #d6f2ec;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: #35d2b5;
+      box-shadow: 0 0 0 5px rgba(53, 210, 181, 0.18);
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(46px, 7vw, 86px);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 670px;
+      margin: 22px 0 0;
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 20px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 12px 18px;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .button.primary {
+      background: #f7c15d;
+      color: #172033;
+    }
+
+    .button.secondary {
+      border-color: rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+    }
+
+    .trust-strip {
+      width: min(1160px, calc(100% - 40px));
+      margin: 36px auto 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 8px;
+      background: rgba(12, 21, 34, 0.56);
+      backdrop-filter: blur(14px);
+    }
+
+    .trust-item {
+      min-height: 82px;
+      padding: 16px;
+      border-right: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .trust-item:last-child {
+      border-right: 0;
+    }
+
+    .trust-item strong {
+      display: block;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .trust-item span {
+      display: block;
+      margin-top: 4px;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 13px;
+    }
+
+    section {
+      padding: 76px 0;
+    }
+
+    .wrap {
+      width: min(1160px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 34px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 38px;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .visible-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .tile {
+      min-height: 154px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+    }
+
+    .tile .icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      border-radius: 8px;
+      background: var(--soft-green);
+      color: var(--teal-dark);
+      font-weight: 900;
+    }
+
+    .tile h3 {
+      margin: 0 0 8px;
+      font-size: 19px;
+    }
+
+    .tile p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .band {
+      background: var(--wash);
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .quote {
+      padding: 26px;
+      border-left: 5px solid var(--amber);
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .quote p {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.18;
+      font-weight: 800;
+    }
+
+    .story-list {
+      display: grid;
+      gap: 16px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .story-list li {
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      gap: 14px;
+      align-items: start;
+      color: var(--muted);
+    }
+
+    .story-list b {
+      color: var(--ink);
+    }
+
+    .check {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: var(--soft-amber);
+      color: var(--amber);
+      font-weight: 900;
+    }
+
+    .offer {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .price-box {
+      position: sticky;
+      top: 92px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .price {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin: 8px 0 6px;
+    }
+
+    .price strong {
+      font-size: 48px;
+      line-height: 1;
+    }
+
+    .price span {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .included {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .included li {
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .report-preview {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .preview-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+      background: #172033;
+      color: #fff;
+    }
+
+    .preview-body {
+      display: grid;
+      gap: 14px;
+      padding: 20px;
+    }
+
+    .score-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    .score {
+      min-height: 96px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--wash);
+    }
+
+    .score span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .score strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 22px;
+    }
+
+    .finding {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .status {
+      display: inline-flex;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: var(--soft-green);
+      color: var(--teal-dark);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    .boundary {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .boundary h3 {
+      margin: 0 0 14px;
+      font-size: 22px;
+    }
+
+    .boundary ul {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    .faq {
+      display: grid;
+      gap: 12px;
+    }
+
+    details {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    summary {
+      min-height: 56px;
+      padding: 16px 18px;
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    details p {
+      margin: 0;
+      padding: 0 18px 18px;
+      color: var(--muted);
+    }
+
+    .final-cta {
+      background: #172033;
+      color: #fff;
+    }
+
+    .final-cta p {
+      color: rgba(255, 255, 255, 0.76);
+    }
+
+    .footer {
+      padding: 26px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 860px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        min-height: 88vh;
+        background-position: 62% center;
+      }
+
+      .trust-strip,
+      .visible-grid,
+      .story-grid,
+      .offer,
+      .split {
+        grid-template-columns: 1fr;
+      }
+
+      .trust-item {
+        border-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      }
+
+      .trust-item:last-child {
+        border-bottom: 0;
+      }
+
+      .price-box {
+        position: static;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .nav,
+      .hero-inner,
+      .trust-strip,
+      .wrap {
+        width: min(100% - 28px, 1160px);
+      }
+
+      h1 {
+        font-size: 44px;
+      }
+
+      .hero p {
+        font-size: 18px;
+      }
+
+      section {
+        padding: 56px 0;
+      }
+
+      .score-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav" aria-label="Primary">
+      <div class="brand">CleanMyFootprint</div>
+      <div class="nav-links">
+        <a href="#visible">What We Check</a>
+        <a href="#scan">The Scan</a>
+        <a href="#trust">Trust</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Public-source online footprint scan</p>
+          <h1>People search before they trust. Know what they will find.</h1>
+          <p>We scan public search results, profiles, directories, old PDFs, business pages, and visible contact details, then show what matters and what can be reduced, corrected, or monitored.</p>
+          <div class="cta-row">
+            <a class="button primary" href="#scan">Start My Footprint Scan</a>
+            <a class="button secondary" href="#visible">See What Could Be Visible</a>
+          </div>
+        </div>
+      </div>
+      <div class="trust-strip" aria-label="Trust boundaries">
+        <div class="trust-item">
+          <strong>Public-source only</strong>
+          <span>No hacking or private account access.</span>
+        </div>
+        <div class="trust-item">
+          <strong>No passwords</strong>
+          <span>We do not ask for login credentials.</span>
+        </div>
+        <div class="trust-item">
+          <strong>48-hour scan</strong>
+          <span>Delivery after complete intake details.</span>
+        </div>
+        <div class="trust-item">
+          <strong>You approve requests</strong>
+          <span>No external cleanup action without approval.</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="visible">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Your professional reputation is built from fragments.</h2>
+          <p>Search results do not explain context. They show old pages, partial details, duplicate profiles, and public records that may still look current.</p>
+        </div>
+        <div class="visible-grid">
+          <article class="tile">
+            <div class="icon">01</div>
+            <h3>Old profiles</h3>
+            <p>Past roles, stale bios, forgotten directories, and event pages that still appear when someone searches.</p>
+          </article>
+          <article class="tile">
+            <div class="icon">02</div>
+            <h3>Exposed details</h3>
+            <p>Public phone numbers, emails, business listings, or profile data that may be more visible than expected.</p>
+          </article>
+          <article class="tile">
+            <div class="icon">03</div>
+            <h3>Duplicate listings</h3>
+            <p>Mirrored pages and repeated business records that make outdated information harder to control.</p>
+          </article>
+          <article class="tile">
+            <div class="icon">04</div>
+            <h3>Public documents</h3>
+            <p>Indexed PDFs, old documents, association pages, and search snippets that may remain searchable for years.</p>
+          </article>
+          <article class="tile">
+            <div class="icon">05</div>
+            <h3>False matches</h3>
+            <p>Similar names and noisy results separated from real findings so the report does not overstate risk.</p>
+          </article>
+          <article class="tile">
+            <div class="icon">06</div>
+            <h3>Cleanup routes</h3>
+            <p>Clear notes on what can likely be removed, corrected, refreshed, hidden, monitored, or handled only by you.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="wrap story-grid">
+        <div class="quote">
+          <p>Before a client, recruiter, investor, competitor, or stranger searches your name, search yourself properly.</p>
+        </div>
+        <ul class="story-list">
+          <li><span class="check">✓</span><span><b>For senior roles:</b> check what appears before interviews, promotions, or public announcements.</span></li>
+          <li><span class="check">✓</span><span><b>For business owners:</b> spot outdated company pages, directory records, and exposed contact details.</span></li>
+          <li><span class="check">✓</span><span><b>For public-facing work:</b> understand what customers, partners, and competitors may find first.</span></li>
+          <li><span class="check">✓</span><span><b>For peace of mind:</b> know what is visible, clean what you can, and monitor what matters.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="scan">
+      <div class="wrap offer">
+        <div class="price-box">
+          <p class="eyebrow" style="color: var(--teal-dark);">Introductory beta</p>
+          <h2 style="margin: 0; font-size: 34px; line-height: 1.1;">Personal Online Footprint Scan</h2>
+          <div class="price"><strong>SGD 39</strong><span>one-time scan</span></div>
+          <p class="small">Delivered within 48 hours after payment and complete intake details are received.</p>
+          <div class="cta-row">
+            <a class="button primary" href="checkout.html">Start My Footprint Scan</a>
+            <a class="button secondary" style="background: var(--teal-dark);" href="polished-sample-report-alex-tan-2026-06-06.html">View Sample Report</a>
+          </div>
+          <p class="small">Payment is handled through Stripe checkout before intake details are collected.</p>
+        </div>
+        <div>
+          <div class="section-head">
+            <h2>What the scan includes</h2>
+            <p>A practical report that separates real exposure from noise and tells you what to do next.</p>
+          </div>
+          <ul class="included">
+            <li>Where your name, business, phone, email, or public profiles appear.</li>
+            <li>Search terms checked and key results reviewed.</li>
+            <li>Outdated profiles, duplicate listings, old event pages, stale records, and public documents.</li>
+            <li>False-positive notes so you know what does and does not appear to match you.</li>
+            <li>Risk priority: low, medium, or high.</li>
+            <li>What can likely be removed, corrected, hidden, refreshed, or monitored.</li>
+            <li>What requires your own account login or direct authorization.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="wrap split">
+        <div>
+          <div class="section-head">
+            <h2>The report is built for action, not panic.</h2>
+            <p>You get a guided view of the situation, a recommended path, and clear boundaries before anything external happens.</p>
+          </div>
+          <a class="button primary" href="polished-sample-report-alex-tan-2026-06-06.html">Open Sample Report</a>
+        </div>
+        <div class="report-preview" aria-label="Report preview">
+          <div class="preview-top">
+            <strong>Footprint Scan Report</strong>
+            <span>CMF-DEMO-20260606</span>
+          </div>
+          <div class="preview-body">
+            <div class="score-row">
+              <div class="score"><span>Exposure level</span><strong>Moderate</strong></div>
+              <div class="score"><span>Urgent items</span><strong>0</strong></div>
+              <div class="score"><span>Next step</span><strong>Decide</strong></div>
+            </div>
+            <div class="finding">
+              <span class="status">Action required</span>
+              <h3>Business registration details appear across public records</h3>
+              <p class="small">Confirm whether details are accurate, outdated, excessive, or suitable for monitoring.</p>
+            </div>
+            <div class="finding">
+              <span class="status">Approval boundary</span>
+              <h3>Nothing external is sent without client approval</h3>
+              <p class="small">Drafts are reviewed before any correction or removal request goes out.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="trust">
+      <div class="wrap split">
+        <div class="boundary">
+          <h3>What we do</h3>
+          <ul>
+            <li>Review public-source search results and visible pages.</li>
+            <li>Rank exposure and cleanup feasibility.</li>
+            <li>Prepare removal, correction, refresh, or monitoring recommendations.</li>
+            <li>Tell you clearly when something cannot realistically be removed.</li>
+          </ul>
+        </div>
+        <div class="boundary">
+          <h3>What we do not do</h3>
+          <ul>
+            <li>No hacking, private account access, or password requests.</li>
+            <li>No NRIC, passport, bank, or unrelated sensitive details.</li>
+            <li>No impersonation and no legal advice.</li>
+            <li>No unrealistic promise to erase everything from the internet.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="band">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Common questions</h2>
+          <p>CleanMyFootprint is about clarity, control, and practical next steps.</p>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>Can you remove everything?</summary>
+            <p>No. No honest service can promise that. We help identify and reduce unnecessary public exposure where possible.</p>
+          </details>
+          <details>
+            <summary>Do you need my passwords?</summary>
+            <p>No. The scan uses public-source information and details you provide. If a cleanup action requires account access, we tell you what to do yourself.</p>
+          </details>
+          <details>
+            <summary>Is this legal?</summary>
+            <p>The scan uses public information and client-provided details. Removal or correction requests are made only with client authorization.</p>
+          </details>
+          <details>
+            <summary>What happens after the report?</summary>
+            <p>You can keep it for awareness, request cleanup support, monitor key items, or improve controlled professional visibility.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Start with clarity.</h2>
+          <p>See what is visible before strangers, recruiters, customers, or competitors search for you.</p>
+        </div>
+        <div class="cta-row">
+          <a class="button primary" href="checkout.html">Start My Footprint Scan</a>
+          <a class="button secondary" href="client-next-step-response-form.html">View Response Flow</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">CleanMyFootprint is a working MVP concept. Public-source only. No private account access.</div>
+  </footer>
+</body>
+</html>

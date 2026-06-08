@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Footprint Scan Intake - CleanMyFootprint</title>
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #596274;
+      --line: #d9e1ea;
+      --paper: #ffffff;
+      --wash: #f4f7f8;
+      --teal: #0f766e;
+      --teal-dark: #0b4f4b;
+      --soft-green: #e7f4f1;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--wash);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    main {
+      width: min(920px, calc(100% - 32px));
+      margin: 28px auto;
+      padding: 34px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      box-shadow: 0 18px 60px rgba(24, 33, 47, 0.12);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 36px;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 12px 0 0;
+      color: var(--muted);
+    }
+
+    form {
+      display: grid;
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    fieldset {
+      margin: 0;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--wash);
+    }
+
+    legend,
+    label {
+      font-weight: 800;
+    }
+
+    legend {
+      padding: 0 6px;
+    }
+
+    label {
+      display: block;
+      margin: 0 0 8px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      min-height: 42px;
+      padding: 10px 11px;
+      border: 1px solid #c5ccd7;
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .choice,
+    .consent {
+      display: grid;
+      grid-template-columns: 20px 1fr;
+      gap: 10px;
+      align-items: start;
+      margin: 10px 0;
+      font-weight: 600;
+    }
+
+    .choice input,
+    .consent input {
+      width: 18px;
+      min-height: 18px;
+      margin-top: 3px;
+    }
+
+    .consent {
+      margin: 0;
+      padding: 14px 16px;
+      border: 1px solid #b9e4db;
+      border-radius: 8px;
+      background: var(--soft-green);
+    }
+
+    .note {
+      padding: 14px 16px;
+      border-left: 4px solid var(--teal);
+      border-radius: 0 8px 8px 0;
+      background: var(--soft-green);
+      color: var(--ink);
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    button,
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 14px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--teal);
+      color: #fff;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .button.secondary {
+      background: #2f3a4a;
+    }
+
+    pre {
+      display: none;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      margin: 0;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #111827;
+      color: #f9fafb;
+      font-size: 13px;
+    }
+
+    @media (max-width: 700px) {
+      main {
+        width: 100%;
+        margin: 0;
+        border-left: 0;
+        border-right: 0;
+      }
+
+      .row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Footprint Scan Intake</h1>
+    <p>Submit only details needed for a public-source scan. Do not send passwords, private account access, NRIC/passport numbers, bank details, or unrelated sensitive documents.</p>
+
+    <form id="intake-form">
+      <fieldset>
+        <legend>Contact details</legend>
+        <div class="row">
+          <div>
+            <label for="full-name">Full name</label>
+            <input id="full-name" name="fullName" autocomplete="name">
+          </div>
+          <div>
+            <label for="email">Email address</label>
+            <input id="email" name="email" type="email" autocomplete="email">
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="location">Country or primary location</label>
+            <input id="location" name="location" placeholder="Example: Singapore">
+          </div>
+          <div>
+            <label for="contact-method">Preferred contact method</label>
+            <select id="contact-method" name="contactMethod">
+              <option>Email</option>
+              <option>Telegram</option>
+              <option>Phone call if needed</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Search identity</legend>
+        <label for="name-variations">Name variations to check</label>
+        <textarea id="name-variations" name="nameVariations" placeholder="Example: Alex Tan, Alex J W Tan, Tan Jun Wei Alex"></textarea>
+        <div class="row">
+          <div>
+            <label for="current-company">Current company or business</label>
+            <input id="current-company" name="currentCompany">
+          </div>
+          <div>
+            <label for="title">Public title or role</label>
+            <input id="title" name="title" placeholder="Example: General Manager">
+          </div>
+        </div>
+        <label for="past-companies">Past company names to include</label>
+        <textarea id="past-companies" name="pastCompanies"></textarea>
+        <label for="public-links">Public profile links or website to include</label>
+        <textarea id="public-links" name="publicLinks" placeholder="LinkedIn, company bio, public website, directory profile, or domain"></textarea>
+      </fieldset>
+
+      <fieldset>
+        <legend>Optional identifiers</legend>
+        <p class="note">These help reduce false matches. Use public or business details only.</p>
+        <div class="row">
+          <div>
+            <label for="business-phone">Public business phone</label>
+            <input id="business-phone" name="businessPhone">
+          </div>
+          <div>
+            <label for="business-email">Public business email</label>
+            <input id="business-email" name="businessEmail">
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="city">City or region</label>
+            <input id="city" name="city">
+          </div>
+          <div>
+            <label for="handles">Known public usernames or handles</label>
+            <input id="handles" name="handles">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Main concern</legend>
+        <label class="choice"><input type="checkbox" name="concern" value="Know what appears in name search"> I want to know what appears when people search my name.</label>
+        <label class="choice"><input type="checkbox" name="concern" value="Phone or email exposed"> I think my phone number or email is exposed.</label>
+        <label class="choice"><input type="checkbox" name="concern" value="Old profiles or outdated information"> I have old profiles or outdated information online.</label>
+        <label class="choice"><input type="checkbox" name="concern" value="Job move or senior role"> I am changing jobs or applying for senior roles.</label>
+        <label class="choice"><input type="checkbox" name="concern" value="Business listings"> I own a business and want to check public listings.</label>
+        <label class="choice"><input type="checkbox" name="concern" value="Impersonation concern"> I am worried about impersonation.</label>
+        <label class="choice"><input type="checkbox" name="concern" value="Reduce exposure"> I want to reduce my public exposure.</label>
+      </fieldset>
+
+      <div>
+        <label for="notes">Additional context</label>
+        <textarea id="notes" name="notes" placeholder="Add any specific pages, search terms, or concerns to check."></textarea>
+      </div>
+
+      <label class="consent">
+        <input id="scan-consent" type="checkbox">
+        I authorize CleanMyFootprint to perform a public-source online footprint scan using the details I provide. I understand the scan does not involve hacking, private account access, stolen data, or guaranteed removal.
+      </label>
+
+      <label class="consent">
+        <input id="privacy-confirmation" type="checkbox">
+        I confirm I have not submitted passwords, bank details, NRIC/passport numbers, or private account credentials through this form.
+      </label>
+
+      <div class="button-row">
+        <button type="button" id="generate">Generate Intake Message</button>
+        <button type="button" id="copy">Copy Message</button>
+        <a class="button secondary" href="checkout.html">Back To Checkout</a>
+      </div>
+
+      <pre id="output" aria-live="polite"></pre>
+    </form>
+  </main>
+
+  <script>
+    const form = document.getElementById("intake-form");
+    const output = document.getElementById("output");
+
+    function value(name) {
+      const field = form.elements[name];
+      return field ? field.value || "" : "";
+    }
+
+    function checkedValues(name) {
+      return Array.from(form.querySelectorAll("input[name='" + name + "']:checked")).map((item) => item.value).join(", ");
+    }
+
+    function ensureConsent() {
+      const scanConsent = document.getElementById("scan-consent").checked;
+      const privacy = document.getElementById("privacy-confirmation").checked;
+      if (scanConsent && privacy) return true;
+      output.textContent = "Please tick both consent confirmations before generating the intake message.";
+      output.style.display = "block";
+      return false;
+    }
+
+    function buildMessage() {
+      return [
+        "Footprint scan intake",
+        "",
+        "Full name: " + value("fullName"),
+        "Email: " + value("email"),
+        "Location: " + value("location"),
+        "Preferred contact method: " + value("contactMethod"),
+        "Name variations: " + value("nameVariations"),
+        "Current company: " + value("currentCompany"),
+        "Public title / role: " + value("title"),
+        "Past companies: " + value("pastCompanies"),
+        "Public links / website: " + value("publicLinks"),
+        "Public business phone: " + value("businessPhone"),
+        "Public business email: " + value("businessEmail"),
+        "City / region: " + value("city"),
+        "Public handles: " + value("handles"),
+        "Main concerns: " + checkedValues("concern"),
+        "Additional context: " + value("notes"),
+        "",
+        "Consent: Public-source scan authorized.",
+        "Privacy confirmation: No passwords, bank details, NRIC/passport numbers, or private credentials submitted.",
+        "",
+        "Internal handling note:",
+        "- Assign case ID after payment confirmation.",
+        "- Start 48-hour clock only after intake details are complete.",
+        "- Ask clarification if identity details are too ambiguous."
+      ].join("\\n");
+    }
+
+    document.getElementById("generate").addEventListener("click", () => {
+      if (!ensureConsent()) return;
+      output.textContent = buildMessage();
+      output.style.display = "block";
+    });
+
+    document.getElementById("copy").addEventListener("click", async () => {
+      if (!ensureConsent()) return;
+      const message = buildMessage();
+      output.textContent = message;
+      output.style.display = "block";
+      try {
+        await navigator.clipboard.writeText(message);
+        output.textContent = message + "\\n\\nCopied to clipboard.";
+      } catch (error) {
+        output.textContent = message + "\\n\\nCopy failed. Select this text and copy it manually.";
+      }
+    });
+  </script>
+</body>
+</html>

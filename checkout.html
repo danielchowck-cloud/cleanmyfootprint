@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Start Your Footprint Scan - CleanMyFootprint</title>
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #596274;
+      --line: #d9e1ea;
+      --paper: #ffffff;
+      --wash: #f4f7f8;
+      --teal: #0f766e;
+      --teal-dark: #0b4f4b;
+      --amber: #c07a22;
+      --soft-green: #e7f4f1;
+      --soft-amber: #fff4df;
+      --shadow: 0 22px 70px rgba(21, 31, 48, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--wash);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .wrap {
+      width: min(1040px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 22px 0;
+      border-bottom: 1px solid var(--line);
+      background: #172033;
+      color: #fff;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      font-weight: 850;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+    }
+
+    main {
+      padding: 48px 0 68px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .copy {
+      padding: 34px;
+    }
+
+    .order {
+      padding: 28px;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--teal);
+      font-size: 13px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 44px;
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin: 0 0 16px;
+      font-size: 24px;
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 14px 0 0;
+      color: var(--muted);
+    }
+
+    ul {
+      display: grid;
+      gap: 10px;
+      margin: 20px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    .price {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin: 8px 0 6px;
+    }
+
+    .price strong {
+      font-size: 48px;
+      line-height: 1;
+    }
+
+    .price span {
+      color: var(--muted);
+      font-weight: 750;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 48px;
+      margin-top: 22px;
+      padding: 12px 18px;
+      border: 0;
+      border-radius: 8px;
+      background: #f7c15d;
+      color: #172033;
+      font-weight: 850;
+      text-decoration: none;
+    }
+
+    .button.secondary {
+      background: var(--teal-dark);
+      color: #fff;
+    }
+
+    .button.disabled,
+    .button[aria-disabled="true"] {
+      cursor: not-allowed;
+      background: #d4dbe3;
+      color: #667085;
+    }
+
+    .note {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-left: 4px solid var(--teal);
+      border-radius: 0 8px 8px 0;
+      background: var(--soft-green);
+      color: var(--ink);
+    }
+
+    .setup-note {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border: 1px solid #f0d7a2;
+      border-radius: 8px;
+      background: var(--soft-amber);
+      color: #5b3b10;
+      font-size: 14px;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .step {
+      min-height: 126px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .step strong {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 820px) {
+      .hero,
+      .flow {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      h1 {
+        font-size: 38px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="wrap" aria-label="Primary">
+      <a class="brand" href="index.html">CleanMyFootprint</a>
+      <div class="nav-links">
+        <a href="index.html">Landing Page</a>
+        <a href="privacy-consent.html">Privacy</a>
+        <a href="polished-sample-report-alex-tan-2026-06-06.html">Sample Report</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <div class="hero">
+      <section class="panel copy">
+        <p class="eyebrow">Start scan</p>
+        <h1>Personal Online Footprint Scan</h1>
+        <p>We review public-source search results, profiles, directories, public business records, old PDFs, duplicated pages, and visible professional details that may appear when someone searches for you.</p>
+        <ul>
+          <li>Public-source footprint scan.</li>
+          <li>Search terms and key sources reviewed.</li>
+          <li>Exposure summary and risk priority.</li>
+          <li>False-positive notes.</li>
+          <li>Cleanup feasibility and recommended next step.</li>
+          <li>Report delivery within 48 hours after complete intake details.</li>
+        </ul>
+        <p class="note">No hacking, no private account access, no password requests, no legal advice, and no guaranteed removal from the internet.</p>
+      </section>
+
+      <aside class="panel order">
+        <h2>Order summary</h2>
+        <div class="price"><strong>SGD 39</strong><span>beta price</span></div>
+        <p class="small">Secure payment is handled by Stripe. After payment, you will be directed to the intake form so we can start the scan accurately.</p>
+        <a class="button disabled" id="stripe-pay-button" href="#" aria-disabled="true">Stripe Payment Link Not Connected</a>
+        <a class="button secondary" href="privacy-consent.html">Review Privacy And Consent</a>
+        <p class="setup-note" id="stripe-setup-note">Stripe setup pending: add the live Payment Link URL in <strong>stripe-config.js</strong>. Do not send customers to intake before payment is connected.</p>
+        <p class="small">The 48-hour delivery clock starts after payment is received and intake details are complete.</p>
+      </aside>
+    </div>
+
+    <section class="flow" aria-label="Scan flow">
+      <div class="step">
+        <strong>1. Pay</strong>
+        <span class="small">Customer pays through the Stripe-hosted checkout link.</span>
+      </div>
+      <div class="step">
+        <strong>2. Complete intake</strong>
+        <span class="small">Customer submits enough public identity details to reduce false matches.</span>
+      </div>
+      <div class="step">
+        <strong>3. Receive report</strong>
+        <span class="small">The 48-hour clock starts after payment and complete intake details are both received.</span>
+      </div>
+    </section>
+  </main>
+  <script src="stripe-config.js"></script>
+  <script>
+    const config = window.CMF_STRIPE_CONFIG || {};
+    const button = document.getElementById("stripe-pay-button");
+    const note = document.getElementById("stripe-setup-note");
+    const paymentLink = (config.paymentLink || "").trim();
+
+    if (paymentLink && paymentLink.startsWith("https://buy.stripe.com/")) {
+      button.href = paymentLink;
+      button.textContent = "Pay SGD 39 With Stripe";
+      button.classList.remove("disabled");
+      button.removeAttribute("aria-disabled");
+      note.textContent = "After payment, Stripe should redirect you to the intake form. Please complete it so the scan can begin.";
+    } else {
+      button.addEventListener("click", (event) => event.preventDefault());
+    }
+  </script>
+</body>
+</html>

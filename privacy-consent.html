@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy And Consent - CleanMyFootprint</title>
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #596274;
+      --line: #d9e1ea;
+      --paper: #ffffff;
+      --wash: #f4f7f8;
+      --teal: #0f766e;
+      --soft-green: #e7f4f1;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--wash);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    main {
+      width: min(880px, calc(100% - 32px));
+      margin: 28px auto;
+      padding: 36px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      box-shadow: 0 18px 60px rgba(24, 33, 47, 0.12);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 38px;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin: 30px 0 10px;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 12px 0 0;
+      color: var(--muted);
+    }
+
+    ul {
+      margin: 12px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    li {
+      margin: 6px 0;
+    }
+
+    .note {
+      margin-top: 22px;
+      padding: 16px 18px;
+      border-left: 4px solid var(--teal);
+      border-radius: 0 8px 8px 0;
+      background: var(--soft-green);
+      color: var(--ink);
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: var(--teal);
+      color: #fff;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .button.secondary {
+      background: #2f3a4a;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Privacy And Consent</h1>
+    <p>This page sets the working boundary for the CleanMyFootprint MVP. It should be reviewed before launch and expanded into a formal policy when the service goes public.</p>
+
+    <section>
+      <h2>What we collect</h2>
+      <p>We collect only the details needed to run a public-source online footprint scan and reduce false matches.</p>
+      <ul>
+        <li>Name variations.</li>
+        <li>Email address and preferred contact method.</li>
+        <li>Country, city, current company, public role, and past company names when relevant.</li>
+        <li>Public profile links, public business email, public business phone, domain, or known public usernames if provided.</li>
+        <li>Customer concerns and notes about what to check.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>What we do not want</h2>
+      <ul>
+        <li>Passwords or one-time passcodes.</li>
+        <li>Private account access.</li>
+        <li>NRIC, passport, bank, or card details.</li>
+        <li>Unrelated sensitive documents.</li>
+        <li>Instructions to impersonate the customer or bypass site rules.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Consent boundary</h2>
+      <p>The customer authorizes CleanMyFootprint to perform a public-source scan using the details provided. The scan does not involve hacking, private account access, stolen data, or guaranteed removal.</p>
+      <p>For cleanup support, CleanMyFootprint may prepare draft removal, correction, cache-refresh, or monitoring recommendations, but no third-party request is sent until the customer approves the specific action.</p>
+    </section>
+
+    <section>
+      <h2>Storage and deletion</h2>
+      <p>For MVP operations, customer details should be stored only in the case tracker, report files, and communication thread needed to complete the service. Once the case is closed, keep only what is necessary for audit, accounting, and follow-up, then delete working notes that are no longer needed.</p>
+    </section>
+
+    <p class="note">Plain rule: collect less, explain clearly, and never make the customer wonder whether something will be sent externally without approval.</p>
+
+    <div class="button-row">
+      <a class="button" href="intake.html">Continue To Intake</a>
+      <a class="button secondary" href="checkout.html">Back To Checkout</a>
+      <a class="button secondary" href="index.html">Landing Page</a>
+    </div>
+  </main>
+</body>
+</html>
