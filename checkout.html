@@ -269,7 +269,7 @@
 
       <aside class="panel order">
         <h2>Order summary</h2>
-        <div class="price"><strong>SGD 39</strong><span>beta price</span></div>
+        <div class="price"><strong>SGD 29.90</strong><span>one-time scan</span></div>
         <p class="small">Secure payment is handled by Stripe. After payment, you will be directed to the intake form so we can start the scan accurately.</p>
         <a class="button disabled" id="stripe-pay-button" href="#" aria-disabled="true">Stripe Payment Link Not Connected</a>
         <a class="button secondary" href="privacy-consent.html">Review Privacy And Consent</a>
@@ -302,7 +302,7 @@
 
     if (paymentLink && paymentLink.startsWith("https://buy.stripe.com/")) {
       button.href = paymentLink;
-      button.textContent = "Pay SGD 39 With Stripe";
+      button.textContent = "Pay SGD 29.90 With Stripe";
       button.classList.remove("disabled");
       button.removeAttribute("aria-disabled");
       note.textContent = "After payment, Stripe should redirect you to the intake form. Please complete it so the scan can begin.";
