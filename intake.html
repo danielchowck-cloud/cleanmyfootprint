@@ -164,6 +164,7 @@
       cursor: pointer;
     }
 
+    button.secondary,
     .button.secondary {
       background: #2f3a4a;
     }
@@ -200,23 +201,28 @@
     <h1>Footprint Scan Intake</h1>
     <p>Submit only details needed for a public-source scan. Do not send passwords, private account access, NRIC/passport numbers, bank details, or unrelated sensitive documents.</p>
 
-    <form id="intake-form">
+    <form id="intake-form" action="https://formsubmit.co/hello@cleanmyfootprint.com" method="POST">
+      <input type="hidden" name="_subject" value="CleanMyFootprint scan intake">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://cleanmyfootprint.com/intake-received.html">
+      <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="display: none;">
       <fieldset>
         <legend>Contact details</legend>
         <div class="row">
           <div>
             <label for="full-name">Full name</label>
-            <input id="full-name" name="fullName" autocomplete="name">
+            <input id="full-name" name="fullName" autocomplete="name" required>
           </div>
           <div>
             <label for="email">Email address</label>
-            <input id="email" name="email" type="email" autocomplete="email">
+            <input id="email" name="email" type="email" autocomplete="email" required>
           </div>
         </div>
         <div class="row">
           <div>
             <label for="location">Country or primary location</label>
-            <input id="location" name="location" placeholder="Example: Singapore">
+            <input id="location" name="location" placeholder="Example: Singapore" required>
           </div>
           <div>
             <label for="contact-method">Preferred contact method</label>
@@ -291,18 +297,19 @@
       </div>
 
       <label class="consent">
-        <input id="scan-consent" type="checkbox">
+        <input id="scan-consent" name="scanConsent" value="Public-source scan authorized" type="checkbox" required>
         I authorize CleanMyFootprint to perform a public-source online footprint scan using the details I provide. I understand the scan does not involve hacking, private account access, stolen data, or guaranteed removal.
       </label>
 
       <label class="consent">
-        <input id="privacy-confirmation" type="checkbox">
+        <input id="privacy-confirmation" name="privacyConfirmation" value="No passwords, bank details, NRIC/passport numbers, or private credentials submitted" type="checkbox" required>
         I confirm I have not submitted passwords, bank details, NRIC/passport numbers, or private account credentials through this form.
       </label>
 
       <div class="button-row">
-        <button type="button" id="generate">Generate Intake Message</button>
-        <button type="button" id="copy">Copy Message</button>
+        <button type="submit">Submit Intake Details</button>
+        <button class="secondary" type="button" id="generate">Preview Message</button>
+        <button class="secondary" type="button" id="copy">Copy Backup</button>
         <a class="button secondary" href="checkout.html">Back To Checkout</a>
       </div>
 

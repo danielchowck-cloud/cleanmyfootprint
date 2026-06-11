@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Intake Received - CleanMyFootprint</title>
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #596274;
+      --line: #d9e1ea;
+      --paper: #ffffff;
+      --wash: #f4f7f8;
+      --teal: #0f766e;
+      --soft-green: #e7f4f1;
+      --shadow: 0 22px 70px rgba(21, 31, 48, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--wash);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    .wrap {
+      width: min(920px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 22px 0;
+      border-bottom: 1px solid var(--line);
+      background: #172033;
+      color: #fff;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand,
+    .nav-links a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .brand {
+      font-weight: 850;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    main {
+      padding: 58px 0 72px;
+    }
+
+    .panel {
+      padding: 34px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--teal);
+      font-size: 13px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 44px;
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 14px 0 0;
+      color: var(--muted);
+    }
+
+    .note {
+      margin-top: 20px;
+      padding: 14px 16px;
+      border-left: 4px solid var(--teal);
+      border-radius: 0 8px 8px 0;
+      background: var(--soft-green);
+      color: var(--ink);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      margin-top: 24px;
+      padding: 12px 18px;
+      border-radius: 8px;
+      background: #f7c15d;
+      color: #172033;
+      font-weight: 850;
+      text-decoration: none;
+    }
+
+    @media (max-width: 720px) {
+      .nav-links {
+        display: none;
+      }
+
+      h1 {
+        font-size: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="wrap" aria-label="Primary">
+      <a class="brand" href="index.html">CleanMyFootprint</a>
+      <div class="nav-links">
+        <a href="privacy-consent.html">Privacy</a>
+        <a href="polished-sample-report-alex-tan-2026-06-06.html">Sample Report</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="panel">
+      <p class="eyebrow">Intake received</p>
+      <h1>We have your scan details.</h1>
+      <p>Your intake has been submitted to CleanMyFootprint. We will review the details and contact you if anything is unclear before starting the scan.</p>
+      <p class="note">The 48-hour delivery clock starts after both payment and complete intake details are received. If the information is too ambiguous, we will ask a clarification question first.</p>
+      <a class="button" href="index.html">Back To CleanMyFootprint</a>
+    </section>
+  </main>
+</body>
+</html>
